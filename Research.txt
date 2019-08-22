@@ -1,0 +1,12 @@
+Chap 23
+  sys.argv
+  encoding
+  .strip()
+  .encode()
+  utf-8
+
+chap 25
+    .pop()
+
+chap 28
+  Why Boolean expression return operands? Find an example.
