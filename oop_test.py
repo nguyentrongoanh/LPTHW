@@ -11,14 +11,14 @@ PHRASE = {
     "class %%%(%%%):":
       "Make a class named %%% that is-a %%%.",
     "class %%%(object):\n\tdef __init__(self, ***)":
-      "class %%% has-a __init__ that takes self and *** parameter",
+      "class %%% has-a __init__ that takes self and *** params",
     "class %%%(object):\n\tdef ***(self, @@@)":
-      "class %%% has-a function *** that takes self and @@@ parameters",
+      "class %%% has-a function *** that takes self and @@@ params",
     "*** = %%%()":
       "Set *** to an instance of class %%%.",
     "***.***(@@@)":
-      "From *** get the *** function, call it with params self.",
-    "****.**** = '***'":
+      "From *** get the *** function, call it with params self, @@@.",
+    "***.*** = '***'":
       "From *** get the *** attribute and set it to '***'."
 }
 
@@ -37,13 +37,14 @@ for word in urlopen(WORD_URL).readlines():
 def convert(snippet, phrase):
     class_names = [w.capitalize() for w in # pick each word from the list and capitalizes it
                     random.sample(WORDS, snippet.count("%%%"))] # create a random list of words in WORDS, lenght = number of %%% that counted in a snippet
-    print(">>>> ", snippet.count("%%%"))
+    # print(">>>> ", snippet.count("%%%"))
     other_names = random.sample(WORDS, snippet.count("***")) # create a random list of words in WORDS, length = number of *** that counted in a snippet
     results = [] # create an empty list name result
     param_names = [] # create an empty list name param
 
     for i in range(0, snippet.count("@@@")):
         param_count = random.randint(1,3)
+        print(">>>>>> param count", repr(param_count))
         param_names.append(', '.join(random.sample(WORDS, param_count)))
 
     for sentence in snippet, phrase:
@@ -69,12 +70,12 @@ def convert(snippet, phrase):
 try:
     while True:
         snippets = list(PHRASE.keys())
-        print(">>>>> ", repr(snippets))
+        # print(">>>>> ", repr(snippets))
         random.shuffle(snippets)
-        print("<<<<<", repr(random.shuffle(snippets)))
+        # print("<<<<< suffle snippet", repr(snippets))
         for snippet in snippets:
             phrase = PHRASE[snippet]
-            print(">>>>", repr(PHRASE[snippet]))
+            # print(">>>>", repr(PHRASE[snippet]))
             question, answer = convert(snippet, phrase)
             if PHRASE_FIRST:
                 question, answer = answer, question
